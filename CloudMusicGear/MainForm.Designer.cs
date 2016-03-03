@@ -30,8 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupOptions = new System.Windows.Forms.GroupBox();
+            this.useCustomDns = new System.Windows.Forms.CheckBox();
             this.proxyAddress = new System.Windows.Forms.TextBox();
             this.useProxy = new System.Windows.Forms.CheckBox();
+            this.customDnsAddress = new System.Windows.Forms.ComboBox();
             this.overseasCdnAddress = new System.Windows.Forms.ComboBox();
             this.useOverseasCdn = new System.Windows.Forms.CheckBox();
             this.pacPortNum = new System.Windows.Forms.NumericUpDown();
@@ -58,8 +60,10 @@
             // 
             // groupOptions
             // 
+            this.groupOptions.Controls.Add(this.useCustomDns);
             this.groupOptions.Controls.Add(this.proxyAddress);
             this.groupOptions.Controls.Add(this.useProxy);
+            this.groupOptions.Controls.Add(this.customDnsAddress);
             this.groupOptions.Controls.Add(this.overseasCdnAddress);
             this.groupOptions.Controls.Add(this.useOverseasCdn);
             this.groupOptions.Controls.Add(this.pacPortNum);
@@ -72,32 +76,62 @@
             this.groupOptions.Controls.Add(this.forcePlayback);
             this.groupOptions.Controls.Add(this.portNum);
             this.groupOptions.Controls.Add(this.portLabel);
-            this.groupOptions.Location = new System.Drawing.Point(13, 13);
+            this.groupOptions.Location = new System.Drawing.Point(17, 15);
+            this.groupOptions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupOptions.Name = "groupOptions";
-            this.groupOptions.Size = new System.Drawing.Size(683, 110);
+            this.groupOptions.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupOptions.Size = new System.Drawing.Size(911, 127);
             this.groupOptions.TabIndex = 0;
             this.groupOptions.TabStop = false;
             this.groupOptions.Text = "Options";
             // 
+            // useCustomDns
+            // 
+            this.useCustomDns.AutoSize = true;
+            this.useCustomDns.Location = new System.Drawing.Point(531, 95);
+            this.useCustomDns.Name = "useCustomDns";
+            this.useCustomDns.Size = new System.Drawing.Size(109, 19);
+            this.useCustomDns.TabIndex = 14;
+            this.useCustomDns.Text = "Custom DNS";
+            this.useCustomDns.UseVisualStyleBackColor = true;
+            this.useCustomDns.CheckedChanged += new System.EventHandler(this.useCustomDns_CheckedChanged);
+            // 
             // proxyAddress
             // 
             this.proxyAddress.Enabled = false;
-            this.proxyAddress.Location = new System.Drawing.Point(65, 80);
+            this.proxyAddress.Location = new System.Drawing.Point(87, 92);
+            this.proxyAddress.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.proxyAddress.Name = "proxyAddress";
-            this.proxyAddress.Size = new System.Drawing.Size(608, 20);
+            this.proxyAddress.Size = new System.Drawing.Size(314, 25);
             this.proxyAddress.TabIndex = 13;
             this.proxyAddress.TextChanged += new System.EventHandler(this.proxyAddress_TextChanged);
             // 
             // useProxy
             // 
             this.useProxy.AutoSize = true;
-            this.useProxy.Location = new System.Drawing.Point(7, 82);
+            this.useProxy.Location = new System.Drawing.Point(9, 95);
+            this.useProxy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.useProxy.Name = "useProxy";
-            this.useProxy.Size = new System.Drawing.Size(52, 17);
+            this.useProxy.Size = new System.Drawing.Size(69, 19);
             this.useProxy.TabIndex = 12;
             this.useProxy.Text = "Proxy";
             this.useProxy.UseVisualStyleBackColor = true;
             this.useProxy.CheckedChanged += new System.EventHandler(this.useProxy_CheckedChanged);
+            // 
+            // customDnsAddress
+            // 
+            this.customDnsAddress.Enabled = false;
+            this.customDnsAddress.FormattingEnabled = true;
+            this.customDnsAddress.Items.AddRange(new object[] {
+            "219.141.136.10",
+            "219.141.140.10",
+            "202.106.196.115"});
+            this.customDnsAddress.Location = new System.Drawing.Point(664, 93);
+            this.customDnsAddress.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.customDnsAddress.Name = "customDnsAddress";
+            this.customDnsAddress.Size = new System.Drawing.Size(160, 23);
+            this.customDnsAddress.TabIndex = 11;
+            this.customDnsAddress.SelectedIndexChanged += new System.EventHandler(this.customDnsAddress_SelectedIndexChanged);
             // 
             // overseasCdnAddress
             // 
@@ -127,9 +161,10 @@
             "163.177.171.37",
             "163.177.171.175",
             "163.177.171.206"});
-            this.overseasCdnAddress.Location = new System.Drawing.Point(181, 50);
+            this.overseasCdnAddress.Location = new System.Drawing.Point(241, 58);
+            this.overseasCdnAddress.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.overseasCdnAddress.Name = "overseasCdnAddress";
-            this.overseasCdnAddress.Size = new System.Drawing.Size(121, 21);
+            this.overseasCdnAddress.Size = new System.Drawing.Size(160, 23);
             this.overseasCdnAddress.TabIndex = 11;
             this.overseasCdnAddress.SelectedIndexChanged += new System.EventHandler(this.overseasCdnAddress_SelectedIndexChanged);
             // 
@@ -137,9 +172,10 @@
             // 
             this.useOverseasCdn.AutoSize = true;
             this.useOverseasCdn.Enabled = false;
-            this.useOverseasCdn.Location = new System.Drawing.Point(97, 53);
+            this.useOverseasCdn.Location = new System.Drawing.Point(129, 61);
+            this.useOverseasCdn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.useOverseasCdn.Name = "useOverseasCdn";
-            this.useOverseasCdn.Size = new System.Drawing.Size(78, 17);
+            this.useOverseasCdn.Size = new System.Drawing.Size(93, 19);
             this.useOverseasCdn.TabIndex = 10;
             this.useOverseasCdn.Text = "CDN mode";
             this.useOverseasCdn.UseVisualStyleBackColor = true;
@@ -148,7 +184,8 @@
             // pacPortNum
             // 
             this.pacPortNum.Enabled = false;
-            this.pacPortNum.Location = new System.Drawing.Point(552, 50);
+            this.pacPortNum.Location = new System.Drawing.Point(736, 58);
+            this.pacPortNum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pacPortNum.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -160,7 +197,7 @@
             0,
             0});
             this.pacPortNum.Name = "pacPortNum";
-            this.pacPortNum.Size = new System.Drawing.Size(67, 20);
+            this.pacPortNum.Size = new System.Drawing.Size(89, 25);
             this.pacPortNum.TabIndex = 9;
             this.pacPortNum.Value = new decimal(new int[] {
             3413,
@@ -172,18 +209,20 @@
             // pacPort
             // 
             this.pacPort.AutoSize = true;
-            this.pacPort.Location = new System.Drawing.Point(496, 54);
+            this.pacPort.Location = new System.Drawing.Point(661, 62);
+            this.pacPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.pacPort.Name = "pacPort";
-            this.pacPort.Size = new System.Drawing.Size(49, 13);
+            this.pacPort.Size = new System.Drawing.Size(71, 15);
             this.pacPort.TabIndex = 8;
             this.pacPort.Text = "PAC port";
             // 
             // usePac
             // 
             this.usePac.AutoSize = true;
-            this.usePac.Location = new System.Drawing.Point(398, 53);
+            this.usePac.Location = new System.Drawing.Point(531, 61);
+            this.usePac.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.usePac.Name = "usePac";
-            this.usePac.Size = new System.Drawing.Size(83, 17);
+            this.usePac.Size = new System.Drawing.Size(109, 19);
             this.usePac.TabIndex = 7;
             this.usePac.Text = "Enable PAC";
             this.usePac.UseVisualStyleBackColor = true;
@@ -192,9 +231,10 @@
             // useOverseas
             // 
             this.useOverseas.AutoSize = true;
-            this.useOverseas.Location = new System.Drawing.Point(7, 53);
+            this.useOverseas.Location = new System.Drawing.Point(9, 61);
+            this.useOverseas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.useOverseas.Name = "useOverseas";
-            this.useOverseas.Size = new System.Drawing.Size(71, 17);
+            this.useOverseas.Size = new System.Drawing.Size(93, 19);
             this.useOverseas.TabIndex = 6;
             this.useOverseas.Text = "Overseas";
             this.useOverseas.UseVisualStyleBackColor = true;
@@ -210,18 +250,20 @@
             "MQ / 192000",
             "LQ / 128000",
             "BQ / 96000"});
-            this.downloadQuality.Location = new System.Drawing.Point(552, 21);
+            this.downloadQuality.Location = new System.Drawing.Point(736, 24);
+            this.downloadQuality.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.downloadQuality.Name = "downloadQuality";
-            this.downloadQuality.Size = new System.Drawing.Size(121, 21);
+            this.downloadQuality.Size = new System.Drawing.Size(160, 23);
             this.downloadQuality.TabIndex = 5;
             this.downloadQuality.SelectedIndexChanged += new System.EventHandler(this.downloadQuality_SelectedIndexChanged);
             // 
             // forceDownload
             // 
             this.forceDownload.AutoSize = true;
-            this.forceDownload.Location = new System.Drawing.Point(398, 23);
+            this.forceDownload.Location = new System.Drawing.Point(531, 27);
+            this.forceDownload.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.forceDownload.Name = "forceDownload";
-            this.forceDownload.Size = new System.Drawing.Size(148, 17);
+            this.forceDownload.Size = new System.Drawing.Size(229, 19);
             this.forceDownload.TabIndex = 4;
             this.forceDownload.Text = "Override download quality";
             this.forceDownload.UseVisualStyleBackColor = true;
@@ -237,18 +279,20 @@
             "MQ / 192000",
             "LQ / 128000",
             "BQ / 96000"});
-            this.playbackQuality.Location = new System.Drawing.Point(271, 21);
+            this.playbackQuality.Location = new System.Drawing.Point(361, 24);
+            this.playbackQuality.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.playbackQuality.Name = "playbackQuality";
-            this.playbackQuality.Size = new System.Drawing.Size(121, 21);
+            this.playbackQuality.Size = new System.Drawing.Size(160, 23);
             this.playbackQuality.TabIndex = 3;
             this.playbackQuality.SelectedIndexChanged += new System.EventHandler(this.playbackQuality_SelectedIndexChanged);
             // 
             // forcePlayback
             // 
             this.forcePlayback.AutoSize = true;
-            this.forcePlayback.Location = new System.Drawing.Point(120, 23);
+            this.forcePlayback.Location = new System.Drawing.Point(160, 27);
+            this.forcePlayback.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.forcePlayback.Name = "forcePlayback";
-            this.forcePlayback.Size = new System.Drawing.Size(145, 17);
+            this.forcePlayback.Size = new System.Drawing.Size(229, 19);
             this.forcePlayback.TabIndex = 2;
             this.forcePlayback.Text = "Override playback quality";
             this.forcePlayback.UseVisualStyleBackColor = true;
@@ -256,7 +300,8 @@
             // 
             // portNum
             // 
-            this.portNum.Location = new System.Drawing.Point(38, 22);
+            this.portNum.Location = new System.Drawing.Point(51, 25);
+            this.portNum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.portNum.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -268,7 +313,7 @@
             0,
             0});
             this.portNum.Name = "portNum";
-            this.portNum.Size = new System.Drawing.Size(67, 20);
+            this.portNum.Size = new System.Drawing.Size(89, 25);
             this.portNum.TabIndex = 1;
             this.portNum.Value = new decimal(new int[] {
             3412,
@@ -280,28 +325,31 @@
             // portLabel
             // 
             this.portLabel.AutoSize = true;
-            this.portLabel.Location = new System.Drawing.Point(6, 24);
+            this.portLabel.Location = new System.Drawing.Point(8, 28);
+            this.portLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.portLabel.Name = "portLabel";
-            this.portLabel.Size = new System.Drawing.Size(26, 13);
+            this.portLabel.Size = new System.Drawing.Size(39, 15);
             this.portLabel.TabIndex = 0;
             this.portLabel.Text = "Port";
             // 
             // log
             // 
-            this.log.Location = new System.Drawing.Point(12, 129);
+            this.log.Location = new System.Drawing.Point(16, 149);
+            this.log.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.log.Multiline = true;
             this.log.Name = "log";
             this.log.ReadOnly = true;
             this.log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.log.Size = new System.Drawing.Size(684, 304);
+            this.log.Size = new System.Drawing.Size(911, 350);
             this.log.TabIndex = 2;
             // 
             // startButton
             // 
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(540, 439);
+            this.startButton.Location = new System.Drawing.Point(720, 507);
+            this.startButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.Size = new System.Drawing.Size(100, 27);
             this.startButton.TabIndex = 6;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -310,9 +358,10 @@
             // stopButton
             // 
             this.stopButton.Enabled = false;
-            this.stopButton.Location = new System.Drawing.Point(621, 439);
+            this.stopButton.Location = new System.Drawing.Point(828, 507);
+            this.stopButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(75, 23);
+            this.stopButton.Size = new System.Drawing.Size(100, 27);
             this.stopButton.TabIndex = 7;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
@@ -320,9 +369,10 @@
             // 
             // clearLog
             // 
-            this.clearLog.Location = new System.Drawing.Point(12, 440);
+            this.clearLog.Location = new System.Drawing.Point(16, 508);
+            this.clearLog.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.clearLog.Name = "clearLog";
-            this.clearLog.Size = new System.Drawing.Size(75, 23);
+            this.clearLog.Size = new System.Drawing.Size(100, 27);
             this.clearLog.TabIndex = 3;
             this.clearLog.Text = "Clear";
             this.clearLog.UseVisualStyleBackColor = true;
@@ -338,9 +388,10 @@
             // autoStart
             // 
             this.autoStart.AutoSize = true;
-            this.autoStart.Location = new System.Drawing.Point(93, 444);
+            this.autoStart.Location = new System.Drawing.Point(124, 512);
+            this.autoStart.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.autoStart.Name = "autoStart";
-            this.autoStart.Size = new System.Drawing.Size(124, 17);
+            this.autoStart.Size = new System.Drawing.Size(181, 19);
             this.autoStart.TabIndex = 4;
             this.autoStart.Text = "Start when launched";
             this.autoStart.UseVisualStyleBackColor = true;
@@ -349,9 +400,10 @@
             // autoMinimize
             // 
             this.autoMinimize.AutoSize = true;
-            this.autoMinimize.Location = new System.Drawing.Point(223, 444);
+            this.autoMinimize.Location = new System.Drawing.Point(297, 512);
+            this.autoMinimize.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.autoMinimize.Name = "autoMinimize";
-            this.autoMinimize.Size = new System.Drawing.Size(142, 17);
+            this.autoMinimize.Size = new System.Drawing.Size(205, 19);
             this.autoMinimize.TabIndex = 5;
             this.autoMinimize.Text = "Minimize when launched";
             this.autoMinimize.UseVisualStyleBackColor = true;
@@ -359,9 +411,9 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 476);
+            this.ClientSize = new System.Drawing.Size(943, 549);
             this.Controls.Add(this.autoMinimize);
             this.Controls.Add(this.autoStart);
             this.Controls.Add(this.clearLog);
@@ -370,6 +422,7 @@
             this.Controls.Add(this.log);
             this.Controls.Add(this.groupOptions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "CloudMusicGear";
@@ -409,6 +462,8 @@
         private System.Windows.Forms.NotifyIcon ni;
         private System.Windows.Forms.CheckBox autoStart;
         private System.Windows.Forms.CheckBox autoMinimize;
+        private System.Windows.Forms.CheckBox useCustomDns;
+        private System.Windows.Forms.ComboBox customDnsAddress;
     }
 }
 

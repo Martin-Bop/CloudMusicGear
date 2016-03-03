@@ -78,6 +78,17 @@ namespace CloudMusicGear
             Config.ProxyAddress = proxyAddress.Text;
         }
 
+        private void useCustomDns_CheckedChanged(object sender, EventArgs e)
+        {
+            customDnsAddress.Enabled = useCustomDns.Checked;
+            Config.UseCustomDns = useCustomDns.Checked;
+        }
+
+        private void customDnsAddress_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Config.CustomDnsAddress = customDnsAddress.Text;
+        }
+
         private void mainForm_Load(object sender, EventArgs e)
         {
             Icon = Resources.key_icon;
@@ -121,6 +132,9 @@ namespace CloudMusicGear
 
             useProxy.Checked = Config.UseProxy;
             proxyAddress.Text = Config.ProxyAddress;
+
+            useCustomDns.Checked = Config.UseCustomDns;
+            customDnsAddress.Text = Config.CustomDnsAddress;
 
             autoStart.Checked = Config.AutoStart;
             autoMinimize.Checked = Config.AutoMinimize;

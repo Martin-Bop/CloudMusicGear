@@ -170,6 +170,30 @@ namespace CloudMusicGear.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseCustomDns {
+            get {
+                return ((bool)(this["UseCustomDns"]));
+            }
+            set {
+                this["UseCustomDns"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CustomDnsAddress {
+            get {
+                return ((string)(this["CustomDnsAddress"]));
+            }
+            set {
+                this["CustomDnsAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AutoStart {
             get {
                 return ((bool)(this["AutoStart"]));

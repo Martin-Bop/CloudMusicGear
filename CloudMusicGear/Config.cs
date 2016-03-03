@@ -16,6 +16,8 @@
             PacPort = Properties.Settings.Default.PacPort;
             UseProxy = Properties.Settings.Default.UseProxy;
             ProxyAddress = Properties.Settings.Default.ProxyAddress;
+            UseCustomDns = Properties.Settings.Default.UseCustomDns;
+            CustomDnsAddress = Properties.Settings.Default.CustomDnsAddress;
             AutoStart = Properties.Settings.Default.AutoStart;
             AutoMinimize = Properties.Settings.Default.AutoMinimize;
         }
@@ -34,6 +36,8 @@
             Properties.Settings.Default.PacPort = PacPort;
             Properties.Settings.Default.UseProxy = UseProxy;
             Properties.Settings.Default.ProxyAddress = ProxyAddress;
+            Properties.Settings.Default.UseCustomDns = UseCustomDns;
+            Properties.Settings.Default.CustomDnsAddress = CustomDnsAddress;
             Properties.Settings.Default.AutoStart = AutoStart;
             Properties.Settings.Default.AutoMinimize = AutoMinimize;
             Properties.Settings.Default.Save();
@@ -56,6 +60,9 @@
 
         public static bool UseProxy { get; set; } = false;
         public static string ProxyAddress { get; set; } = string.Empty;
+
+        public static bool UseCustomDns { get; set; } = false;
+        public static string CustomDnsAddress { get; set; } = string.Empty;
 
         public static bool AutoStart { get; set; } = false;
         public static bool AutoMinimize { get; set; } = false;

@@ -1,4 +1,5 @@
 ﻿using Fiddler;
+using Heijden.DNS;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -14,6 +15,7 @@ namespace CloudMusicGear
         private static readonly Regex RexSubp = new Regex("\"subp\":\\d+", RegexOptions.Compiled);
 
         private static WebServer _ws;
+        private static Resolver _resolver;
 
         public static Action<string> LogEntry { private get; set; }
 
@@ -28,6 +30,24 @@ namespace CloudMusicGear
             s["X-OverrideGateway"] = Config.ProxyAddress;
         }
 
+        private static void NeedSetCustomDns(Session s)
+        {
+            // Original music url contains ymusic, while self-generate url not contain.
+            string path = s.PathAndQuery;
+            if (path.EndsWith(".mp3") && !path.Contains("/ymusic/"))
+            {
+                // Some music files only exist in CDN server located in China.
+                // We can find their IP through a China ISP's DNS server.
+                // Then we can get the music directly.
+
+                string ip = GetIPAddress(s.hostname);
+                if (ip != null)
+                {
+                    s["x-overrideHost"] = ip;
+                }
+            }
+        }
+
         public static void Start()
         {
             LogEntry("Starting proxy...");
@@ -39,6 +59,13 @@ namespace CloudMusicGear
             {
                 FiddlerApplication.BeforeRequest += NeedSetProxy;
             }
+
+            if (Config.UseCustomDns)
+            {
+                _resolver = new Resolver(Config.CustomDnsAddress);
+                FiddlerApplication.BeforeRequest += NeedSetCustomDns;
+            }
+
             FiddlerApplication.BeforeResponse += OnResponse;
             LogEntry($"Proxy started, listening at port {Config.Port}");
 
@@ -61,6 +88,13 @@ namespace CloudMusicGear
             {
                 FiddlerApplication.BeforeRequest -= NeedSetProxy;
             }
+
+            if (Config.UseCustomDns)
+            {
+                FiddlerApplication.BeforeRequest -= NeedSetCustomDns;
+                _resolver = null;
+            }
+
             FiddlerApplication.BeforeResponse -= OnResponse;
             FiddlerApplication.Shutdown();
 
@@ -116,6 +150,8 @@ namespace CloudMusicGear
                         {
                             LogEntry($"Plackback bitrate is switched to {bitrate} from {ConvertQuality(Config.PlaybackQuality, "Bitrate")}");
                         }
+                        else return;
+
                         Config.PlaybackQuality = ConvertQuality(bitrate, "Full");
                         string modified = ModifyPlayerApi(s.GetResponseBodyAsString());
                         s.utilSetResponseBody(modified);
@@ -306,6 +342,19 @@ namespace CloudMusicGear
                 default:
                     throw new ArgumentException($"Mode = {mode}");
             }
+        }
+
+        public static string GetIPAddress(string name)
+        {
+            // caches mechanism built-in, just query
+            Response response = _resolver.Query(name, QType.A);
+
+            if (response.RecordsA.Length > 0)
+            {
+                return response.RecordsA[0].ToString();
+            }
+
+            return null;
         }
     }
 }
